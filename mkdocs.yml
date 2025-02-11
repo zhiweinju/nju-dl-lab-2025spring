@@ -31,6 +31,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.tabbed
   - attr_list  # 支持添加属性
 
 # extra:
