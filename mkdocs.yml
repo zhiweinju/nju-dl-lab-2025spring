@@ -7,6 +7,7 @@ theme:
   palette:
     primary: indigo  # 可选：添加主题颜色
   language: zh
+  site_url: https://umnooob.github.io/course-demo
 
 site_name: NJU机器学习实验
 nav:
