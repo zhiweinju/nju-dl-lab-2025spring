@@ -15,6 +15,7 @@ nav:
   - 实验1: 
     - 实验一介绍: "lab1/实验一介绍.md"
     - 环境配置指南: "lab1/环境配置指南.md"
+    - 实验一代码: "lab1/实验一代码.md"
     
 
 markdown_extensions:
