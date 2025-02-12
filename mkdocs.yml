@@ -13,6 +13,12 @@ theme:
   
 site_url: https://umnooob.github.io/course-demo/
 
+extra_css:
+  - https://fonts.loli.net/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap
+  - https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css
+  - https://fonts.loli.net/css2?family=Noto+Serif+SC&display=swap
+  - css/custom.css
+
 site_name: 深度学习平台和应用（2025春）
 nav:
   - 主页: "index.md"

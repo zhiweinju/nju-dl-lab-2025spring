@@ -1,0 +1,43 @@
+:root {
+  --md-text-font: "JetBrains Mono", "LXGW WenKai Screen"; 
+  --md-code-font: "JetBrains Mono", "Noto Serif SC";
+}
+
+.md-typeset code {
+  font-size: .65rem;
+}
+
+/* (覆盖)修改行内代码字体大小 */
+.md-typeset code:not(pre code) {
+  font-size: inherit;
+}
+
+/* 修改代码块行间距 */
+.md-typeset pre {
+  line-height: 1.8;
+}
+
+/* 修改代码块行号(数字)的字体大小 */
+.highlighttable .linenos {
+  /* font-size: 0.93em; */
+  font-size: .65rem;
+}
+
+/* 修改分割线的宽度 */
+.md-typeset hr {
+  border-bottom: .10rem solid var(--md-default-fg-color--lightest);
+}
+
+/* 修改 Note admonition */
+.md-typeset details.note {
+  border-color: hsl(269deg 77% 78%);
+}
+.md-typeset .note > summary {
+  background-color: hsl(269deg 77% 78% / 10%);
+}
+.md-typeset .note > summary::before {
+  background-color: hsl(269deg 77% 78%);
+}
+.md-typeset .note>.admonition-title:after, .md-typeset .note>summary:after {
+  color:hsl(269deg 77% 78%);
+}
