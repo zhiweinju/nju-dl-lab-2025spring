@@ -11,7 +11,7 @@ theme:
     primary: indigo  # 可选：添加主题颜色
   language: zh
   
-site_url: https://umnooob.github.io/course-demo/
+site_url: https://zhiweinju.github.io/nju-dl-lab-2025spring/
 
 extra_css:
   - https://fonts.loli.net/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap
