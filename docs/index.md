@@ -3,7 +3,7 @@
 ## 课程信息
 - **课程名称**：深度学习平台和应用
 - **学年学期**：2024-2025学年 第2学期(春)
-- **上课教师**：[蒋智威](https://zhiweinju.github.io/)
+- **上课教师**：[蒋智威老师](https://zhiweinju.github.io/)、[王智彬老师](https://wzbxpy.github.io/)
 - **时间地点**：周五 5-7节 1-16周 南雍楼 550 机房
 - **联系助教**：
     - 实验一、二： 王锦国、[邓泽轩](mailto:dengzexuan@nju.edu.cn)
