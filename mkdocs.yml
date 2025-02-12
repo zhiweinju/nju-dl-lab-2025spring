@@ -7,6 +7,7 @@ theme:
     - navigation.expand
     - toc.follow
     - content.code.copy
+    - navigation.top
   palette:
     primary: indigo  # 可选：添加主题颜色
   language: zh
