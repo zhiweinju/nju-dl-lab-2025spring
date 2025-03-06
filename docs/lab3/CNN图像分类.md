@@ -9,6 +9,10 @@ CIFAR-10 数据集包含 60,000 张 32×32 像素的彩色图像，
 ## 1. CNN图像分类任务
 本次任务要求补全代码中空缺部分，包括实现一个CNN类，以及训练过程代码
 
+数据集下载链接：
+
+https://box.nju.edu.cn/f/d59d5d910d754c3091f5/
+
 ```bash
 import torchvision.transforms as transforms
 from torchvision import datasets
@@ -98,8 +102,6 @@ def train(model, train_loader, test_loader, device):
             #TODO: 计算损失
             #TODO: 反向传播
             #TODO: 更新参数
-            loss.backward()
-            optimizer.step()
 
             running_loss += loss.item()
             if i % 100 == 99:  # 每100个batch打印一次损失
@@ -148,8 +150,8 @@ plt.title(f"Label: {trainset.classes[labels[0]]}")
 plt.axis('off')
 plt.show()
 ```
-## 2. 在MINST数据集上实现CNN：
-TODO: 在实验二中我们实现了在MINST数据集上进行分类，
+## 2. 在MNIST数据集上实现CNN：
+TODO: 在实验二中我们实现了在MNIST数据集上进行分类，
 使用本节的CNN又该如何实现，结合本节内容以及实验二内容尝试实现
 
 ## 3. 卷积神经网络（LeNet）
@@ -204,7 +206,7 @@ Sigmoid output shape:        torch.Size([1, 84])
 Linear output shape:         torch.Size([1, 10])
 ```
 TODO: 结合图片中所给出的LeNet以及给出的nn.Sequential，将前文给出的net结构以类的方式实现，并实现在
-MINST数据集上的分类
+MNIST数据集上的分类
 
 ## 4. 批量规范化
 训练深层神经网络是十分困难的，特别是在较短的时间内使他们收敛更加棘手。 
@@ -362,4 +364,4 @@ net = nn.Sequential(
     nn.Linear(84, 10))
 ```
 TODO: 使用上述定义的包含BatchNorm的LeNet网络，
-实现在MINST数据集上的图像分类(直接使用nn.Sequential或者自定义类均可)
+实现在MNIST数据集上的图像分类(直接使用nn.Sequential或者自定义类均可)
