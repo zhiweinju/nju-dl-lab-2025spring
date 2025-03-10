@@ -92,7 +92,7 @@ for word, idx in list(vocab_dict.items())[:10]:
 !!! warning "RNN的局限性"
     RNN的局限性在于难以记住长距离上下文，容易导致生成内容缺乏连贯性，且可能出现重复或模式化的文本。
 
-![下载](https://cdn.jsdelivr.net/gh/zhiweinju/nju-dl-lab-2025spring@main/docs/lab4/pics/rnn.png)
+![下载](pics/rnn.png)
 
 #### 前置代码
 
@@ -398,7 +398,7 @@ print(f"Perplexity (PPL): {ppl:.4f}")
     本实验依旧以AG News 数据为例，给定前100个单词作为输入，预测下一个单词，实现文本生成任务。
 
 
-![下载](https://cdn.jsdelivr.net/gh/zhiweinju/nju-dl-lab-2025spring@main/docs/lab4/pics/lstm.png)
+![下载](pics/lstm.png)
 
 文本的预处理 训练数据生成与前面一致
 
@@ -518,7 +518,7 @@ print(generated_text)
     本实验依旧以AG News 数据为例，给定前100个单词作为输入，预测下一个单词，实现文本生成任务。
 
 
-![下载](https://cdn.jsdelivr.net/gh/zhiweinju/nju-dl-lab-2025spring@main/docs/lab4/pics/GRU.png)
+![下载](pics/GRU.png)
 
 
 文本的预处理 训练数据生成与前面一致
