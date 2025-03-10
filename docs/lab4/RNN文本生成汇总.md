@@ -387,6 +387,9 @@ def compute_perplexity(model, test_text, vocab_dict, seq_len=100):
 ppl = compute_perplexity(model, generated_text, vocab_dict)
 print(f"Perplexity (PPL): {ppl:.4f}")
 ```
+
+下面请你按照要求补全计算困惑度的代码
+
 !!! question "思考题"
     思考题4：假设你在RNN和LSTM语言模型上分别计算了困惑度，发现RNN的PPL更低。这是否意味着RNN生成的文本一定更流畅自然？如果不是，在什么情况下这两个困惑度可以直接比较？
 
@@ -612,5 +615,7 @@ print(generated_text)
     思考题8：GRU 只有两个门（更新门和重置门），相比 LSTM 少了一个门控单元，这样的设计有什么优缺点？ 
 
     思考题9：在低算力设备（如手机）上，RNN、LSTM 和 GRU 哪个更适合部署？为什么？
+
+    思考题10：如果我就是要使用RNN模型，原先的代码还有哪里可以优化的地方？请给出修改部分。
 
 
