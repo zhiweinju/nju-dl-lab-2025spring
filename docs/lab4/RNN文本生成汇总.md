@@ -94,6 +94,7 @@ for word, idx in list(vocab_dict.items())[:10]:
     RNN的局限性在于难以记住长距离上下文，容易导致生成内容缺乏连贯性，且可能出现重复或模式化的文本。
 
 ![下载](https://github.com/umnooob/course-demo/tree/main/docs/lab4/pics/rnn.png)
+![示例图片](pics/rnn.png)
 
 #### 前置代码
 
