@@ -1,6 +1,6 @@
-## 实验任务二: RNN、LSTM和GRU文本生成任务
+# 实验任务二: RNN、LSTM和GRU文本生成任务
 
-### **1. 文本预处理**
+## **1. 文本预处理**
 !!! info "文本预处理简介"
     文本预处理是在深度学习和自然语言处理（NLP）任务中，对原始文本进行清理、转换和格式化，使其能够被模型理解和处理的过程。
 
@@ -74,8 +74,7 @@ vocab_dict = {word: idx for idx, word in enumerate(vocab)}
 ```python
 print("词汇表大小:", len(vocab_dict))
 print("前 10 个最常见的单词及其索引:")
-for word, idx in list(vocab_dict.items())[:10]:
-    print(f"{word}: {idx}")
+#TODO:打印前10个高频词元及其索引
 ```
 
 
@@ -85,7 +84,7 @@ for word, idx in list(vocab_dict.items())[:10]:
     思考题2：在深度学习中，为什么不能直接使用单词而需要将其转换为索引？
 
 
-### **2. RNN文本生成实验**
+## **2. RNN文本生成实验**
 
 !!! abstract "RNN文本生成概述"
     使用RNN进行文本生成任务的核心思想是 根据前面的文本预测下一个单词，然后将预测出的单词作为输入，循环迭代生成完整文本。本实验以AG News 数据为例，给定前100个单词作为输入，预测下一个单词，实现文本生成任务。
@@ -96,7 +95,7 @@ for word, idx in list(vocab_dict.items())[:10]:
 
 ![示例图片](pics/rnn.png)
 
-#### 前置代码
+### 前置代码
 
 首先导入所需模块：
 
@@ -147,7 +146,7 @@ vocab_dict = {word: idx for idx, word in enumerate(vocab)}
 ```
 
 
-#### 训练数据生成
+### 训练数据生成
 
 将文本数据转换为数值表示，并按100个单词作为输入、下一个单词作为目标的方式构造训练数据。最终生成 X_train（输入序列）和 Y_train（预测目标），用于 RNN 训练文本生成模型。
 
@@ -186,7 +185,7 @@ train_loader = torch.utils.data.DataLoader(train_data, batch_size=batch_size, sh
     思考题3：如果不打乱训练集，会对生成任务有什么影响？
 
 
-#### RNN 模型构建
+### RNN 模型构建
 
 实现了一个基于 RNN 的文本生成模型，通过输入文本序列预测下一个单词。
 
@@ -225,7 +224,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)  
 ```
 
-#### RNN 模型训练
+### RNN 模型训练
 
 RNN 训练过程
 
@@ -256,7 +255,7 @@ def train_model(model, train_loader, epochs=5):
 train_model(model, train_loader, epochs=20)  
 ```
 
-#### RNN 模型测试
+### RNN 模型测试
 
 RNN 生成文本测试
 
@@ -303,7 +302,7 @@ print("\n🔹 模型生成的文本：\n")
 print(generated_text)
 ```
 
-#### 困惑度评估
+### 困惑度评估
 
 **1. 基本概念**
 困惑度（Perplexity, PPL）是衡量语言模型好坏的一个常见指标，它表示模型对测试数据的不确定性，即模型在预测下一个词时的困惑程度。
@@ -389,7 +388,7 @@ ppl = compute_perplexity(model, generated_text, vocab_dict)
 print(f"Perplexity (PPL): {ppl:.4f}")
 ```
 
-下面请你按照要求补全计算困惑度的代码
+
 
 !!! question "思考题"
     思考题4：假设你在RNN和LSTM语言模型上分别计算了困惑度，发现RNN的PPL更低。这是否意味着RNN生成的文本一定更流畅自然？如果不是，在什么情况下这两个困惑度可以直接比较？
@@ -397,7 +396,7 @@ print(f"Perplexity (PPL): {ppl:.4f}")
     思考题5：困惑度是不是越低越好？
 
 
-### **3. LSTM和GRU文本生成实验**
+## **3. LSTM和GRU文本生成实验**
 
 !!! abstract "LSTM文本生成概述"
     LSTM（Long Short-Term Memory）是一种改进的 RNN，能够通过 门控机制（遗忘门、输入门、输出门） 有效捕捉长期依赖关系，防止梯度消失和梯度爆炸问题，使其在处理长序列任务时比普通 RNN 更强大。
@@ -409,7 +408,7 @@ print(f"Perplexity (PPL): {ppl:.4f}")
 文本的预处理 训练数据生成与前面一致
 
 
-#### LSTM 模型构建
+### LSTM 模型构建
 
 实现了一个基于 LSTM 的文本生成模型，通过输入文本序列预测下一个单词。
 
@@ -440,7 +439,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)  
 ```
 
-#### LSTM 模型训练
+### LSTM 模型训练
 
 LSTM 训练过程
 
@@ -470,7 +469,7 @@ def train_model(model, train_loader, epochs=5):
 train_model(model, train_loader, epochs=20)
 ```
 
-#### LSTM 模型测试
+### LSTM 模型测试
 
 LSTM 生成文本测试
 
@@ -530,7 +529,7 @@ print(generated_text)
 文本的预处理 训练数据生成与前面一致
 
 
-#### GRU 模型构建
+### GRU 模型构建
 
 实现了一个基于 GRU 的文本生成模型，通过输入文本序列预测下一个单词。
 
@@ -561,12 +560,12 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 ```
 
-#### GRU 模型训练
+### GRU 模型训练
 
 GRU 训练过程也与LSTM保持一致
 
 
-#### GRU 模型测试
+### GRU 模型测试
 
 GRU 生成文本测试
 
@@ -617,6 +616,6 @@ print(generated_text)
 
     思考题9：在低算力设备（如手机）上，RNN、LSTM 和 GRU 哪个更适合部署？为什么？
 
-    思考题10：如果我就是要使用RNN模型，原先的代码还有哪里可以优化的地方？请给出修改部分。
+    思考题10：如果就是要使用RNN模型，原先的代码还有哪里可以优化的地方？请给出修改部分代码以及实验结果。
 
 
