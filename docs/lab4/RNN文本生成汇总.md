@@ -170,10 +170,7 @@ def create_data(text_list, seq_len=100):
 
 # 生成训练数据
 X_train, Y_train = create_data(train_text, seq_len=100)
-# 考虑到训练时间 只取前 20% 的数据
-subset_size = int(0.2 * len(X_train))  # 计算 20% 的样本数量
-X_train = X_train[:subset_size]
-Y_train = Y_train[:subset_size]
+
 
 # 创建 DataLoader
 batch_size = 32
