@@ -10,6 +10,16 @@
 
 [https://box.nju.edu.cn/f/a3a2e11167ef4d72a568/?dl=1](https://box.nju.edu.cn/f/a3a2e11167ef4d72a568/?dl=1)
 
+#### 预训练模型（BERT）下载链接：
+
+[https://box.nju.edu.cn/d/2710380144234ce78fe3/](https://box.nju.edu.cn/d/2710380144234ce78fe3/)
+[//]: # ([https://box.nju.edu.cn/d/2710380144234ce78fe3/])
+
+!!! warning "可能需要安装transformers包"
+```bash
+   pip install transformers
+```
+
 ### 预处理
 
 首先导入所需模块：
@@ -20,10 +30,11 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
-from torchtext.data.utils import get_tokenizer
-from torchtext.vocab import build_vocab_from_iterator
+# from torchtext.data.utils import get_tokenizer
+# from torchtext.vocab import build_vocab_from_iterator
 from tqdm import tqdm
 import pandas as pd
+from transformers import AutoTokenizer
 ```
 
 数据读取以及预处理
@@ -32,52 +43,54 @@ import pandas as pd
 
 
 ```python
-# ---------------- 数据读取 ---------------- #
-# 这里需要填入train.csv和test.csv实际所在位置
-train_df = pd.read_csv('train.csv')
-test_df = pd.read_csv('test.csv')
+# **1. 加载 AG NEWS 数据集**
+df = pd.read_csv("train.csv")  # 请替换成你的文件路径
+df.columns = ["label", "title", "description"]  # CSV 有3列: 标签, 标题, 描述
+df["text"] = df["title"] + " " + df["description"]  # 合并标题和描述作为输入文本
+df["label"] = df["label"] - 1  # AG NEWS 的标签是 1-4，我们转换成 0-3
+train_texts, train_labels = df["text"].tolist(), df["label"].tolist()
+number = int(0.3 * len(train_texts))
+train_texts, train_labels = train_texts[: number], train_labels[: number]
 
-tokenizer = get_tokenizer('basic_english')
+df = pd.read_csv("test.csv")  # 请替换成你的文件路径
+df.columns = ["label", "title", "description"]  # CSV 有3列: 标签, 标题, 描述
+df["text"] = df["title"] + " " + df["description"]  # 合并标题和描述作为输入文本
+df["label"] = df["label"] - 1  # AG NEWS 的标签是 1-4，我们转换成 0-3
+test_texts, test_labels = df["text"].tolist(), df["label"].tolist()
 
-# ---------------- 构建词表 ---------------- #
-def yield_tokens(dataframe):
-    for _, row in dataframe.iterrows():
-        text = row['Title'] + " " + row['Description']  # 拼接 title 和 description
-        yield tokenizer(text)
+# **2. 加载 BERT Tokenizer**
+model_name = "bert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-vocab = build_vocab_from_iterator(yield_tokens(train_df), specials=["<pad>", "<unk>"])
-vocab.set_default_index(vocab["<unk>"])
-pad_idx = vocab['<pad>']
-
-# ---------------- 自定义 Dataset ---------------- #
+# **3. 处理数据**
 class AGNewsDataset(Dataset):
-    def __init__(self, df):
-        self.df = df
+    def __init__(self, texts, labels, tokenizer, max_length=50):
+        self.texts = texts
+        self.labels = labels
+        self.tokenizer = tokenizer
+        self.max_length = max_length
 
     def __len__(self):
-        return len(self.df)
+        return len(self.texts)
 
     def __getitem__(self, idx):
-        row = self.df.iloc[idx]
-        label = row['Class Index'] - 1  # 让标签从 0 开始
-        text = row['Title'] + " " + row['Description']
-        tokens = torch.tensor(vocab(tokenizer(text)), dtype=torch.long)
-        return tokens, label
+        text = self.texts[idx]
+        label = self.labels[idx]
+        encoding = self.tokenizer(
+            text, truncation=True, padding="max_length", max_length=self.max_length, return_tensors="pt"
+        )
+        input_ids = encoding["input_ids"].squeeze(0)
+        return input_ids, torch.tensor(label, dtype=torch.long)
 
-def collate_batch(batch):
-    text_list, label_list = [], []
-    for tokens, label in batch:
-        text_list.append(tokens)
-        label_list.append(label)
-    text_list = pad_sequence(text_list, batch_first=True, padding_value=pad_idx)
-    return text_list, torch.tensor(label_list)
+vocab = tokenizer.get_vocab()
+pad_idx = tokenizer.pad_token_id
+unk_idx = tokenizer.unk_token_id
 
-# ---------------- dataloader ---------------- #
-train_dataset = AGNewsDataset(train_df)
-test_dataset = AGNewsDataset(test_df)
+train_dataset = AGNewsDataset(train_texts, train_labels, tokenizer)
+test_dataset = AGNewsDataset(test_texts, test_labels, tokenizer)
 
-train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, collate_fn=collate_batch)
-test_dataloader = DataLoader(test_dataset, batch_size=32, shuffle=False, collate_fn=collate_batch)
+train_dataloader = DataLoader(train_dataset, batch_size=16, shuffle=True)
+test_dataloader = DataLoader(test_dataset, batch_size=16, shuffle=False)
 ```
 
 ### 位置编码器
