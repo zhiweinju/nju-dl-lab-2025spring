@@ -41,8 +41,8 @@ nav:
     - 4.3 实验任务二：RNN文本生成: "lab4/RNN文本生成汇总.md"
   - 实验五:
       - 5.1 实验说明: "lab5/实验五介绍.md"
-      - 5.2 实验任务一：transformer: "lab5/transformer.md"
-      - 5.3 实验任务二：RNN文本生成: "lab5/transformer.md"
+      - 5.2 实验任务一：Transformer: "lab5/transformer.md"
+      - 5.3 实验任务二：预训练语言模型: "lab5/预训练语言模型.md"
 
 
 
