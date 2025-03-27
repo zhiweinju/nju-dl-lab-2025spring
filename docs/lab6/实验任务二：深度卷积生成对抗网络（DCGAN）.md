@@ -193,7 +193,7 @@ def main():
     # 设定超参数
     input_dim = 100  # 生成器输入的随机噪声向量维度
     batch_size = 128  # 训练时的批量大小
-    num_epoch = 10  # 训练的总轮数
+    num_epoch = 30  # 训练的总轮数
 
     # 加载 MNIST 数据集
     train_dataset = datasets.MNIST(root="./data/", train=True, transform=transforms.ToTensor(), download=True)
