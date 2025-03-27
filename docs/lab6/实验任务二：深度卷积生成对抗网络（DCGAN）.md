@@ -174,6 +174,8 @@ class Discriminator(nn.Module):
         return output  # 返回判别结果
 ```
 
+#### 训练过程
+
 训练过程及数据保存参考实验任务一
 
 ```python
@@ -253,5 +255,3 @@ if __name__ == '__main__':
 
     思考题3: DCGAN中为什么使用批归一化（Batch Normalization）？它对训练过程有什么影响？
 
-
-#### 
