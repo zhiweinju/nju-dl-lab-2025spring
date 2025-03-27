@@ -261,7 +261,7 @@ def main():
     hidden_dim = 256  # 隐藏层维度
     output_dim = 28 * 28  # MNIST 数据集图像尺寸（28x28）
     batch_size = 128  # 训练时的批量大小
-    num_epoch = 50 # 训练的总轮数
+    num_epoch = 30 # 训练的总轮数
 
     # 加载 MNIST 数据集
     train_dataset = datasets.MNIST(root="./data/", train=True, transform=transforms.ToTensor(), download=True)
