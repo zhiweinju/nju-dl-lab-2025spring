@@ -252,7 +252,7 @@ def main():
     # 设定超参数
     input_dim = 100
     batch_size = 128
-    num_epoch = 10
+    num_epoch = 30
     clip_value = 0.01   # 判别器权重裁剪范围，确保满足 Lipschitz 条件
 
     # 加载 MNIST 数据集
