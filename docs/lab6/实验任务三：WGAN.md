@@ -22,7 +22,7 @@ WGAN（Wasserstein Generative Adversarial Network）是对传统 GAN 的改进�
     
     •	**不使用 Sigmoid 激活**：WGAN 的判别器输出没有 Sigmoid 激活函数，因为它不需要将输出限制在 [0,1] 之间。
 
-如需更加深入的学习，可参考该论文：[Wasserstein GAN](./Wasserstein GAN.pdf)
+如需更加深入的学习，可参考该论文：[Wasserstein GAN](https://arxiv.org/pdf/1701.07875)
 
 ## 2. WGAN的实现
 部分细节可参考实验任务一和二。

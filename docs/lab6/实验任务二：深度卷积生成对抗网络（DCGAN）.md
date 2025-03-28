@@ -35,7 +35,7 @@ DCGAN（Deep Convolutional GAN）引入卷积神经网络（CNN）来改进 GAN�
     
     •**Tanh 作为生成器输出激活函数**（适应数据范围）。
 
-如需更加深入的学习，可参考该论文：[Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](./Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks.pdf)
+如需更加深入的学习，可参考该论文：[Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/pdf/1511.06434)
 
 ## 2. DCGAN的实现
 

@@ -125,7 +125,7 @@ $$
 
 
 
-如需更加深入的学习，可参考该论文：[Generative Adversarial Nets](./Generative Adversarial Nets.pdf)
+如需更加深入的学习，可参考该论文：[Generative Adversarial Nets](https://arxiv.org/pdf/1406.2661)
 
 ## 2. GAN的实现
 
