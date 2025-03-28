@@ -14,6 +14,16 @@
     
     •	torchvision：数据预处理和可视化
 
+!!! warning "注意"
+
+    在实验开始时，请确保实验运行在GPU上！
+    在python环境下或在jupyter notebook里测试：
+    ```python
+    import torch
+    torch.cuda.is_available()
+    ```
+    如果返回True，则GPU能被调用，否则请重启docker环境或举手示意
+
 ## 1. 了解GAN的基本概念
 
 !!! abstract "**什么是 GAN？**"
