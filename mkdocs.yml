@@ -53,6 +53,19 @@ nav:
       - 7.2 实验任务：迁移学习和元学习: "lab7/迁移学习和元学习介绍.md"
   - 课程大作业:
     - 可选的课程大作业: "final/课程大作业.md"
+    - 多模态谣言检测: "final/projects/NJUProject_MultimodalRumorDetection.md"
+    - 参数高效微调（PEFT）: "final/projects/NJUProject_PEFT.md"
+    - 强化学习: "final/projects/NJU_DL2025_project_RL.md"
+    - 检索增强生成（RAG）: "final/projects/NJU_2025spring_ragprojects.md"
+    - decode长度预测: "final/projects/Generation_Length_Prediction.md"
+    - KV cache缓存策略探索: "final/projects/Caching-Strategy.md"
+    - 大模型训练性能Profiling和优化: "final/projects/Profiling-optimization.md"
+    - 大模型训练过程中的显存换出换入探索: "final/projects/TRAINING_SWAP.md"
+    - MoE Offloading：混合专家模型推理显存换入换出: "final/projects/NJUProject_MoE_Offloading.md"
+    - 投机解码的draft策略分析: "final/projects/NJUProject_Speculative_Decoding_Draft_Strategy.md"
+    - 干预LLM: "final/projects/NJU_steer.md"
+    - 智能工具调用代理系统: "final/projects/NJUProject_toolagent.md"
+    - 轻量级多Agent协作系统: "final/projects/NJUProject_multiagent.md"
 
 
 
