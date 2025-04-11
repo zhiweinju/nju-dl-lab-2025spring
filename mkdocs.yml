@@ -53,11 +53,11 @@ nav:
       - 7.2 实验任务：迁移学习和元学习: "lab7/迁移学习和元学习介绍.md"
   - 课程大作业:
     - 可选的课程大作业: "final/课程大作业.md"
-    - 多模态谣言检测: "final/projects/NJUProject_MultimodalRumorDetection.md"
     - 参数高效微调（PEFT）: "final/projects/NJUProject_PEFT.md"
     - 强化学习: "final/projects/NJU_DL2025_project_RL.md"
     - 检索增强生成（RAG）: "final/projects/NJU_2025spring_ragprojects.md"
     - 文档排序: "final/projects/NJU_2025spring_ranking.md"
+    - 多模态谣言检测: "final/projects/NJUProject_MultimodalRumorDetection.md"
     - decode长度预测: "final/projects/Generation_Length_Prediction.md"
     - KV cache缓存策略探索: "final/projects/Caching-Strategy.md"
     - 大模型训练性能Profiling和优化: "final/projects/Profiling-optimization.md"
