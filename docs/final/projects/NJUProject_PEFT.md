@@ -61,9 +61,9 @@
 
 ## 参考资源
 
-- HuggingFace PEFT: https://github.com/huggingface/peft
-- AdapterHub: https://adapterhub.ml/
-- LoRA 原论文: https://arxiv.org/abs/2106.09685
-- Prefix Tuning: https://arxiv.org/abs/2101.00190
-- BitFit: https://arxiv.org/abs/2106.10199
-- IA^3: https://arxiv.org/abs/2205.05638
+- HuggingFace PEFT: [https://github.com/huggingface/peft](https://github.com/huggingface/peft)
+- AdapterHub: [https://adapterhub.ml/](https://adapterhub.ml/)
+- LoRA 原论文: [https://arxiv.org/abs/2106.09685](https://arxiv.org/abs/2106.09685)
+- Prefix Tuning: [https://arxiv.org/abs/2101.00190](https://arxiv.org/abs/2101.00190)
+- BitFit: [https://arxiv.org/abs/2106.10199](https://arxiv.org/abs/2106.10199)
+- IA^3: [https://arxiv.org/abs/2205.05638](https://arxiv.org/abs/2205.05638)
