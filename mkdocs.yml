@@ -64,7 +64,7 @@ nav:
     - 大模型训练过程中的显存换出换入探索: "final/projects/TRAINING_SWAP.md"
     - MoE Offloading：混合专家模型推理显存换入换出: "final/projects/NJUProject_MoE_Offloading.md"
     - 投机解码的draft策略分析: "final/projects/NJUProject_Speculative_Decoding_Draft_Strategy.md"
-    - 干预LLM: "final/projects/NJU_steer.md"
+    - 基于引导的大语言模型幻觉缓解: "final/projects/NJU_steer.md"
     - 智能工具调用代理系统: "final/projects/NJUProject_toolagent.md"
     - 轻量级多Agent协作系统: "final/projects/NJUProject_multiagent.md"
 
