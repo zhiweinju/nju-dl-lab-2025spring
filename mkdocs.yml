@@ -57,6 +57,7 @@ nav:
     - 参数高效微调（PEFT）: "final/projects/NJUProject_PEFT.md"
     - 强化学习: "final/projects/NJU_DL2025_project_RL.md"
     - 检索增强生成（RAG）: "final/projects/NJU_2025spring_ragprojects.md"
+    - 文档排序: "final/projects/NJU_2025spring_ranking.md"
     - decode长度预测: "final/projects/Generation_Length_Prediction.md"
     - KV cache缓存策略探索: "final/projects/Caching-Strategy.md"
     - 大模型训练性能Profiling和优化: "final/projects/Profiling-optimization.md"
