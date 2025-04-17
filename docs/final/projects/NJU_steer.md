@@ -16,6 +16,7 @@
 参照《Inference time intervention: Eliciting truthful answers from a language model》，实现对大语言模型的干预，讨论干预对于模型的影响
 
 **核心要求：**
+
 + 基线对比
 + 不同layer实验分析
 + 不同位置的内部表示实验分析
@@ -52,10 +53,16 @@ without tuning.
 
 更详细内容参考：https://github.com/sylinrl/TruthfulQA/tree/main
 
-### 3.2 必做实验
+### 3.2 基础实验（65分 = 结果准确性40分 + 报告质量25分）
+
 + **基线对比:** 对比干预前后MC1、MC2指标的变化
 + **layer实验**：针对LLM的不同层，进行干预，讨论干预不同的layer对实验结果的影响
 + **提取不同位置的hidden_states实验：** 针对每一层中不同位置的内部表示，比如经过注意力头之后的hidden_states，mlp运算之后的hidden_states等
++ **干预强度分析:** 随着干预强度的增大，MC1和MC2是否会越来越好？再打印几个输出，观察具体示例分析模型是否产生了更好的输出。如果没有产生更好的输出，而MC指标变好了，请分析原因。
+
+### 3.3 进阶实验（35分 = 创新性20分+ 报告质量15分）
+
+请在Inference time intervention: Eliciting truthful answers from a language model的基础上，设计一个新的算法（Truth forest除外）以提升性能，并且通过实验验证。
 
 
 ## 四、提交内容
