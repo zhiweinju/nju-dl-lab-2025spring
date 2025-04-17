@@ -1,7 +1,5 @@
 # MoE Offloading：混合专家模型推理显存换入换出
 
-# 课程大作业：MoE Offloading
-
 ## 一、任务说明
 
 ## 1.1 背景
