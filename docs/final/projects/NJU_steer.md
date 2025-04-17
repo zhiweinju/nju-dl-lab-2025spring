@@ -60,7 +60,7 @@ without tuning.
 + **提取不同位置的hidden_states实验：** 针对每一层中不同位置的内部表示，比如经过注意力头之后的hidden_states，mlp运算之后的hidden_states等
 + **干预强度分析:** 随着干预强度的增大，MC1和MC2是否会越来越好？再打印几个输出，观察具体示例分析模型是否产生了更好的输出。如果没有产生更好的输出，而MC指标变好了，请分析原因。
 
-### 3.3 进阶实验（35分 = 创新性20分+ 报告质量15分）
+### 3.3 进阶实验（35分 = 创新性20分 + 报告质量15分）
 
 请在Inference time intervention: Eliciting truthful answers from a language model的基础上，设计一个新的算法（Truth forest除外）以提升性能，并且通过实验验证。
 
