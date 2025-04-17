@@ -1,7 +1,5 @@
 # 投机解码的draft策略分析
 
-# NJUProject_Speculative_Decoding_Draft_Strategy
-
 # 课程大作业：推测解码的draft策略分析
 
 ## 一、任务说明
