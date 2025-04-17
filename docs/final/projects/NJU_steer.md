@@ -3,9 +3,7 @@
 ## 一、任务说明
 
 ### 1.1 背景介绍
-大型语言模型(LLM)有时会产生幻觉，特别是LLM可能会产生不真实的反应，
-尽管知道正确的知识。激活LLM中的真实性是充分释放LLM知识潜能的关键，可以通过对LLM
-内部表示进行干预，达到缓解幻觉的目的。
+大型语言模型(LLM)有时会产生幻觉，特别是LLM可能会产生不真实的反应，尽管知道正确的知识。激活LLM中的真实性是充分释放LLM知识潜能的关键，可以通过对LLM内部表示进行干预，达到缓解幻觉的目的。
 
 ### 1.2 数据集说明
 
@@ -15,8 +13,7 @@
 
 ## 二、方法设计规范
 
-参照《Inference time intervention: Eliciting truthful answers from a
-language model.》，实现对大语言模型的干预，讨论干预对于模型的影响
+参照《Inference time intervention: Eliciting truthful answers from a language model》，实现对大语言模型的干预，讨论干预对于模型的影响
 
 **核心要求：**
 + 基线对比
@@ -83,7 +80,5 @@ without tuning.
 ## 五、注意事项
 
 **参考文献：** 如果你在实验和报告中参考了已发表的文献，请列出你所参考的相关文献。
-
-**截止日期：** 2025年6月20日 23:59（UTC+8）。
 
 如有疑问，请联系 652024320001@smail.nju.edu.cn。
