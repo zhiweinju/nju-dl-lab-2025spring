@@ -90,6 +90,4 @@ draft策略会影响最终有多少token会被target model成功验证。本项�
 
 **参考文献：** 如果你在实验和报告中参考了已发表的文献，请列出你所参考的相关文献。
 
-**截止日期：** 2025年6月20日 23:59（UTC+8）。
-
 如有疑问，请联系 wzbwangzhibin@gmail.com 或 zzhbrr@gmail.com。
