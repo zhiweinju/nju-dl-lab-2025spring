@@ -70,6 +70,7 @@ nav:
     - 基于引导的大语言模型幻觉缓解: "final/projects/NJU_steer.md"
     - 智能工具调用代理系统: "final/projects/NJUProject_toolagent.md"
     - 轻量级多Agent协作系统: "final/projects/NJUProject_multiagent.md"
+    - 基于扩散模型的个性化图像生成: "final/projects/NJU_DL2025_project_diffusion.md"
 
 
 
