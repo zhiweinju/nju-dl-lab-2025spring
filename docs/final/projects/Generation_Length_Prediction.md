@@ -134,6 +134,4 @@
 
     - 如果你在实验和报告中参考了已发表的文献，请列出你所参考的相关文献。
 
-4. **截止日期**：2025年6月10日 23:59（UTC+8）
-
-5. 如有疑问，请联系 wzbwangzhibin@gmail.com 或 spli161006@gmail.com。
+4. 如有疑问，请联系 wzbwangzhibin@gmail.com 或 spli161006@gmail.com。
