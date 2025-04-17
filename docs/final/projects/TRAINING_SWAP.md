@@ -56,6 +56,5 @@
 
 ## **<font style="color:rgb(38, 38, 38);">五、注意事项</font>**
 **<font style="color:rgb(38, 38, 38);">参考文献：</font>**<font style="color:rgb(38, 38, 38);"> 如果你在实验和报告中参考了已发表的文献，请列出你所参考的相关文献。  
-</font>**<font style="color:rgb(38, 38, 38);">截止日期：</font>**<font style="color:rgb(38, 38, 38);"> 2025年6月20日 23:59（UTC+8）。  
 </font><font style="color:rgb(38, 38, 38);">如有疑问，请联系 wzbwangzhibin@gmail.com 或 wangzb@smail.nju.edu.cn。</font>
 
