@@ -1,5 +1,3 @@
-# 大模型训练性能Profiling和优化
-
 <h1 id="Title">大模型训练性能Profiling和优化</h1>
 
 <h2 id="AnC0t">一、背景</h2>
