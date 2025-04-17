@@ -58,7 +58,7 @@ nav:
   - 课程大作业:
     - 可选的课程大作业: "final/课程大作业.md"
     - 参数高效微调（PEFT）: "final/projects/NJUProject_PEFT.md"
-    - 强化学习: "final/projects/NJU_DL2025_project_RL.md"
+    - 基于强化学习的小游戏实现: "final/projects/NJU_DL2025_project_RL.md"
     - 基于大语言模型的零样本文档排序: "final/projects/NJU_2025spring_ranking.md"
     - 多模态谣言检测: "final/projects/NJUProject_MultimodalRumorDetection.md"
     - decode长度预测: "final/projects/Generation_Length_Prediction.md"
