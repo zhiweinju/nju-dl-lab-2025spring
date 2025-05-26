@@ -59,7 +59,7 @@ nav:
       
       
   - 课程大作业:
-    - 答辩说明: "final/答辩说明.md"
+    - 答辩相关安排: "final/答辩相关安排.md"
     - 可选的课程大作业: "final/课程大作业.md"
     - 参数高效微调（PEFT）: "final/projects/NJUProject_PEFT.md"
     - 基于强化学习的小游戏实现: "final/projects/NJU_DL2025_project_RL.md"
