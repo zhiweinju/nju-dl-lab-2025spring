@@ -1,0 +1,2093 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://zhiweinju.github.io/nju-dl-lab-2025spring/final/projects/Profiling-optimization/">
+      
+      
+        <link rel="prev" href="../Caching-Strategy/">
+      
+      
+        <link rel="next" href="../TRAINING_SWAP/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>大模型训练性能Profiling和优化 - 深度学习平台和应用（2025春）</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://fonts.loli.net/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap">
+    
+      <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css">
+    
+      <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Noto+Serif+SC&display=swap">
+    
+      <link rel="stylesheet" href="../../../css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="深度学习平台和应用（2025春）" class="md-header__button md-logo" aria-label="深度学习平台和应用（2025春）" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            深度学习平台和应用（2025春）
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              大模型训练性能Profiling和优化
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lab1/%E5%AE%9E%E9%AA%8C%E4%B8%80%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验一
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lab2/%E5%AE%9E%E9%AA%8C%E4%BA%8C%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验二
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lab3/%E5%AE%9E%E9%AA%8C%E4%B8%89%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验三
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lab4/%E5%AE%9E%E9%AA%8C%E5%9B%9B%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验四
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lab5/%E5%AE%9E%E9%AA%8C%E4%BA%94%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验五
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lab6/%E5%AE%9E%E9%AA%8C%E5%85%AD%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验六
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lab7/%E5%AE%9E%E9%AA%8C%E4%B8%83%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验七
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lab8/%E5%AE%9E%E9%AA%8C%E5%85%AB%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验八
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lab9/%E5%AE%9E%E9%AA%8C%E4%B9%9D%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验九
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../%E7%AD%94%E8%BE%A9%E7%9B%B8%E5%85%B3%E5%AE%89%E6%8E%92/" class="md-tabs__link">
+          
+  
+  
+  课程大作业
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="深度学习平台和应用（2025春）" class="md-nav__button md-logo" aria-label="深度学习平台和应用（2025春）" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    深度学习平台和应用（2025春）
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    主页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验一
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            实验一
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab1/%E5%AE%9E%E9%AA%8C%E4%B8%80%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab1/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.2 实验任务一：环境配置
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab1/%E5%AE%9E%E9%AA%8C%E4%B8%80%E4%BB%A3%E7%A0%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.3 实验任务二：PyTorch练习
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验二
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            实验二
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab2/%E5%AE%9E%E9%AA%8C%E4%BA%8C%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab2/MINIST%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.2 实验任务一：MINIST手写数字识别
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab2/%E6%AD%A3%E5%88%99%E5%8C%96%E5%92%8C%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E6%8E%A2%E7%B4%A2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.3 实验任务二：正则化和激活函数探索
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验三
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            实验三
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab3/%E5%AE%9E%E9%AA%8C%E4%B8%89%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab3/%E5%9B%BE%E5%83%8F%E5%8D%B7%E7%A7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.2 实验任务一：图像卷积
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab3/CNN%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.3 实验任务二：CNN图像分类
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验四
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            实验四
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab4/%E5%AE%9E%E9%AA%8C%E5%9B%9B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab4/%E8%AF%8D%E5%B5%8C%E5%85%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.2 实验任务一：词嵌入
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab4/RNN%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.3 实验任务二：RNN文本生成
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验五
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            实验五
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab5/%E5%AE%9E%E9%AA%8C%E4%BA%94%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab5/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.2 实验任务一：Transformer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab5/%E9%A2%84%E8%AE%AD%E7%BB%83%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.3 实验任务二：预训练语言模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验六
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            实验六
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab6/%E5%AE%9E%E9%AA%8C%E5%85%AD%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab6/%E5%AE%9E%E9%AA%8C%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9A%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%EF%BC%88GAN%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.2 实验任务一：GAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab6/%E5%AE%9E%E9%AA%8C%E4%BB%BB%E5%8A%A1%E4%BA%8C%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%8D%B7%E7%A7%AF%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%EF%BC%88DCGAN%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.3 实验任务二：DCGAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab6/%E5%AE%9E%E9%AA%8C%E4%BB%BB%E5%8A%A1%E4%B8%89%EF%BC%9AWGAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.4 实验任务三：WGAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验七
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            实验七
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab7/%E5%AE%9E%E9%AA%8C%E4%B8%83%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab7/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E5%92%8C%E5%85%83%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.2 实验任务：迁移学习和元学习
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验八
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            实验八
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab8/%E5%AE%9E%E9%AA%8C%E5%85%AB%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab8/%E5%A4%9A%E6%A8%A1%E6%80%81%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8.2 实验任务：多模态情感分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验九
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            实验九
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lab9/%E5%AE%9E%E9%AA%8C%E4%B9%9D%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    课程大作业
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            课程大作业
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%AD%94%E8%BE%A9%E7%9B%B8%E5%85%B3%E5%AE%89%E6%8E%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    答辩相关安排
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AF%BE%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    可选的课程大作业
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NJUProject_PEFT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    参数高效微调（PEFT）
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NJU_DL2025_project_RL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于强化学习的小游戏实现
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NJU_2025spring_ranking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于大语言模型的零样本文档排序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NJUProject_MultimodalRumorDetection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多模态谣言检测
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Generation_Length_Prediction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LLM输出长度预测
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Caching-Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    KV cache缓存策略探索
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    大模型训练性能Profiling和优化
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TRAINING_SWAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    大模型训练过程中的显存换出换入探索
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NJUProject_MoE_Offloading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MoE Offloading：混合专家模型推理显存换入换出
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NJUProject_Speculative_Decoding_Draft_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    投机解码的draft策略分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NJU_steer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于引导的大语言模型幻觉缓解
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NJUProject_toolagent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    智能工具调用代理系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NJUProject_multiagent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    轻量级多Agent协作系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NJU_DL2025_project_diffusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于扩散模型的个性化图像生成
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="Title">大模型训练性能Profiling和优化</h1>
+
+<h2 id="AnC0t">一、背景</h2>
+<p>随着大模型的流行，越来越多大模型不断涌现，而它们通常拥有海量的参数，同时带来了巨大的训练开销。因此，加速模型训练成为从业者的共识。而要想顺利加速训练，我们必须要对训练过程中的性能瓶颈有所了解，并且尝试选择有效的优化策略。因此，我们需要了解常见的性能profiling工具，并熟练掌握整个性能分析优化过程。  </p>
+<h2 id="a18jq">二、任务说明</h2>
+<h3 id="Bd6Ni">2.1 Profiling工具介绍</h3>
+<p>本次实验基于NVIDIA GPU进行。而<font style="color:rgb(6, 6, 7);">NVIDIA Nsight Systems和Nsight Compute是NVIDIA提供的两款强大的性能分析工具，专为GPU开发和优化而设计。</font></p>
+<h4 id="IwR9I"><font style="color:rgb(6, 6, 7);">NVIDIA Nsight </font><font style="color:rgb(6, 6, 7);">Systems</font></h4>
+<p><font style="color:rgb(6, 6, 7);">NVIDIA Nsight</font><sup><font style="color:rgb(6, 6, 7);">[1]</font></sup><font style="color:rgb(6, 6, 7);">是一个系统级性能分析工具，能够帮助开发人员可视化应用算法，发现优化机会。</font></p>
+<ul>
+<li><strong><font style="color:rgb(6, 6, 7);">系统级分析</font></strong><font style="color:rgb(6, 6, 7);">：提供系统级的性能分析，帮助开发者理解整个应用的性能瓶颈。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">多平台支持</font></strong><font style="color:rgb(6, 6, 7);">：支持多种NVIDIA平台，包括大型Tesla多GPU x86服务器、工作站等。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">深度学习框架支持</font></strong><font style="color:rgb(6, 6, 7);">：能够为PyTorch和TensorFlow等深度学习框架的行为和负载提供宝贵见解，允许用户调整模型和参数，以提高单个或多个GPU的整体利用率</font><font style="color:rgb(6, 6, 7);">。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">低开销分析</font></strong><font style="color:rgb(6, 6, 7);">：以低开销的方式运行，不会对系统性能产生过大影响，确保分析结果的准确性。</font></li>
+</ul>
+<h4 id="PXaFL"><font style="color:rgb(6, 6, 7);">NVIDIA Nsight Compute</font></h4>
+<p><font style="color:rgb(6, 6, 7);">NVIDIA Nsight Compute</font><sup><font style="color:rgb(6, 6, 7);">[2]</font></sup><font style="color:rgb(6, 6, 7);">是专门用于分析和优化CUDA程序性能的工具，主要用于深入分析GPU内核执行的详细性能数据，如寄存器使用、内存带宽、指令执行等。</font></p>
+<ul>
+<li><strong><font style="color:rgb(6, 6, 7);">内核级分析</font></strong><font style="color:rgb(6, 6, 7);">：深入GPU内核，提供详细的性能指标和API调试，帮助开发者定位CUDA内核中的瓶颈。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">引导式分析</font></strong><font style="color:rgb(6, 6, 7);">：提供引导式分析，自动检测性能问题，并根据NVIDIA工程师的内置指导提供优化建议。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">源代码关联</font></strong><font style="color:rgb(6, 6, 7);">：支持将源代码与详细的指令指标关联起来，帮助开发者快速定位有问题的代码区域。</font></li>
+</ul>
+<p><font style="color:rgb(6, 6, 7);">Nsight Systems侧重于整个应用程序的系统性能分析，而Nsight Compute专注于GPU内核（算子）的性能分析。通过集成使用，开发者可以同时获得应用程序层面和GPU层面的性能数据，从而更全面地识别和优化性能问题。在实践中，我们通常选择通过Nsight应用程序分析找出执行时间过长的算子，然后再基于Nsight Compute分析其具体原因，再尝试加以优化。</font></p>
+<h3 id="QDRca">2.2 常见的训练性能优化策略</h3>
+<p>通过<font style="color:rgb(6, 6, 7);">profiling我们可以定位出实践中耗时最久的算子，同时也可以发现其主要的问题来源。因此接下来需要对它们进行针对性优化。常见的训练性能优化策略包括数据预处理、通信、算子实现等多个方面：</font></p>
+<h4 id="cXTgH"><font style="color:rgb(6, 6, 7);">数据预处理优化</font></h4>
+
+<ul>
+<li><strong><font style="color:rgb(6, 6, 7);">并行处理</font></strong><font style="color:rgb(6, 6, 7);">：通过多线程或进程并行处理数据，加快数据预处理速度。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">数据压缩</font></strong><font style="color:rgb(6, 6, 7);">：减少数据存储空间和传输开销，降低预处理时间</font><font style="color:rgb(6, 6, 7);">。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">算法优化</font></strong><font style="color:rgb(6, 6, 7);">：使用更高效的算法，减少时间复杂度</font><font style="color:rgb(6, 6, 7);">。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">数据缓存与预取</font></strong><font style="color:rgb(6, 6, 7);">：将数据缓存到内存或高速存储设备中，减少数据读取时间</font><font style="color:rgb(6, 6, 7);">。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">数据预处理流水线</font></strong><font style="color:rgb(6, 6, 7);">：将数据预处理步骤分解为多个阶段，形成流水线处理，提高整体效率。</font></li>
+</ul>
+<h4 id="e2HyG"><font style="color:rgb(6, 6, 7);">算子优化</font></h4>
+
+<ul>
+<li><strong><font style="color:rgb(6, 6, 7);">算子融合</font></strong><font style="color:rgb(6, 6, 7);">：将多个小算子合并成大算子，减少Kernel Launch开销和访存开销</font><font style="color:rgb(6, 6, 7);">。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">内存优化</font></strong><font style="color:rgb(6, 6, 7);">：考虑内存分块等方式，减少全局内存访问，使用共享内存或寄存器来优化数据访问。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">高效的算子实现</font></strong><font style="color:rgb(6, 6, 7);">：使用经过优化的算子库或框架，如cuDNN、TensorRT等。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">算子调度：</font></strong><font style="color:rgb(6, 6, 7);">通过调度算子执行顺序等，不影响其执行逻辑条件下，降低总的计算时间</font></li>
+</ul>
+<h4 id="qPGMa"><font style="color:rgb(6, 6, 7);">通信优化</font></h4>
+
+<ul>
+<li><strong><font style="color:rgb(6, 6, 7);">减少通信次数</font></strong><font style="color:rgb(6, 6, 7);">：通过合并通信操作、批量传输数据等方式，减少通信次数。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">计算和通信重叠</font></strong><font style="color:rgb(6, 6, 7);">：在计算过程中预取下一批数据，同时进行数据传输和计算。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">优化通信拓扑和原语</font></strong><font style="color:rgb(6, 6, 7);">：合理设计节点间的通信连接方式、和通信原语实现，减少总通信延迟。</font></li>
+</ul>
+<h4 id="L80mN"><font style="color:rgb(6, 6, 7);">其他优化</font></h4>
+
+<ul>
+<li><strong><font style="color:rgb(6, 6, 7);">模型优化</font></strong><font style="color:rgb(6, 6, 7);">：简化模型结构、减少参数数量、使用量化技术等，降低计算复杂度</font><font style="color:rgb(6, 6, 7);">。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">资源分配</font></strong><font style="color:rgb(6, 6, 7);">：合理分配CPU、GPU、通信等资源，避免资源竞争和瓶颈。</font></li>
+<li><strong><font style="color:rgb(6, 6, 7);">代码优化</font></strong><font style="color:rgb(6, 6, 7);">：优化代码结构和算法实现，提高代码效率。</font></li>
+</ul>
+<p>实际训练中，我们可能只会遇到其中的一部分瓶颈，而如何选择优化，需要基于profiling结果和实践经验进行选择，有时候不合适的优化反而会造成更大的性能损失。同时值得注意的是，优化应该不影响训练的收敛性和精度。</p>
+<h2 id="jMxTw"><font style="color:rgb(38, 38, 38);">三、实验要求</font></h2>
+<h4 id="dvztr">模型训练性能分析与优化</h4>
+
+<p>（1）<strong>训练部署</strong>：给定一个特定的模型配置，你需要在本地进行部署训练（推荐基于Pytorch平台），完成训练并确保精度达标。</p>
+<p>（2）<strong>性能Profiling</strong>：基于推荐的profiling工具，对训练的单个iteration进行分析，找出训练中耗时最久的Top 5算子，并基于Nsight compute 对这些算子进行Roofline分析<sup>[3]</sup>，找出其性能不佳的原因。</p>
+<p>（3）<strong>性能优化</strong>：根据profiling和分析的结果，你可以自主选择优化，验证优化前后，训练单个iteration的时间是否有改善，优化可以不止一处，效果越佳越好（只和自己的baseline比较）。</p>
+<h2 id="BMx6H"><font style="color:rgb(38, 38, 38);">四、提交内容</font></h2>
+<p><font style="color:rgb(38, 38, 38);">最终你需要提交以下材料：</font></p>
+<h4 id="lHTrU"><font style="color:rgb(38, 38, 38);">优化后的代码：</font></h4>
+
+<ul>
+<li><strong><font style="color:rgb(38, 38, 38);">代码结构不做要求</font></strong>  </li>
+<li><strong><font style="color:rgb(38, 38, 38);">要给出能够运行的python环境（requirement.txt）</font></strong>  </li>
+<li><strong><font style="color:rgb(38, 38, 38);">要给出能成功运行代码的脚本</font></strong></li>
+</ul>
+<h4 id="OGgyt"><font style="color:rgb(38, 38, 38);">实验报告</font></h4>
+
+<ul>
+<li><strong><font style="color:rgb(38, 38, 38);">实现方法</font></strong><font style="color:rgb(38, 38, 38);">：详细描述整个分析和优化过程，重点包括profiling结果的分析、优化策略的选择等</font>  </li>
+<li><strong><font style="color:rgb(38, 38, 38);">实验结果</font></strong><font style="color:rgb(38, 38, 38);">：展示 baseline 的 profiling 结果（Top 5算子性能）</font>，<font style="color:rgb(38, 38, 38);">展示Top 5算子的roofline分析结果，以及选择对应优化后的profiling结果（包括训练时间的加速比、新的Top 5算子性能及其roofline分析结果）</font>  </li>
+<li><strong><font style="color:rgb(38, 38, 38);">结果分析</font></strong><font style="color:rgb(38, 38, 38);">：对以上实验结果的分析，是否可以继续优化的探讨，以及实验过程中遇到的问题和解决过程</font></li>
+</ul>
+<h2 id="sec5"><font style="color:rgb(38, 38, 38);">五、注意事项</font></h2>
+<p><strong><font style="color:rgb(38, 38, 38);">参考文献：</font></strong><font style="color:rgb(38, 38, 38);"> 如果你在实验和报告中参考了已发表的文献，请列出你所参考的相关文献。 </font></p>
+<p><font style="color:rgb(38, 38, 38);">如有疑问，请联系wzbwangzhibin@gmail.com 或 yuhangzhou@smail.nju.edu.cn。</font></p>
+<p>参考文献：<br />
+[1] NVIDIA Nsight Systems. <a href="https://docs.nvidia.com/nsight-systems/index.html">https://docs.nvidia.com/nsight-systems/index.html</a>.</p>
+<p>[2] NVIDIA Nsight Compute. <a href="https://docs.nvidia.com/nsight-compute/index.html">https://docs.nvidia.com/nsight-compute/index.html</a>.</p>
+<p>[3] Williams, S., Waterman, A., &amp; Patterson, D. (2009). Roofline: an insightful visual performance model for multicore architectures. Communications of the ACM, 52(4), 65-76.  </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "toc.follow", "content.code.copy", "navigation.top"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

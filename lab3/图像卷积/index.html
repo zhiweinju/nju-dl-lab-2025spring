@@ -1,0 +1,2690 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://zhiweinju.github.io/nju-dl-lab-2025spring/lab3/%E5%9B%BE%E5%83%8F%E5%8D%B7%E7%A7%AF/">
+      
+      
+        <link rel="prev" href="../%E5%AE%9E%E9%AA%8C%E4%B8%89%E4%BB%8B%E7%BB%8D/">
+      
+      
+        <link rel="next" href="../CNN%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>3.2 实验任务一：图像卷积 - 深度学习平台和应用（2025春）</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://fonts.loli.net/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap">
+    
+      <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css">
+    
+      <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Noto+Serif+SC&display=swap">
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="深度学习平台和应用（2025春）" class="md-header__button md-logo" aria-label="深度学习平台和应用（2025春）" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            深度学习平台和应用（2025春）
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3.2 实验任务一：图像卷积
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lab1/%E5%AE%9E%E9%AA%8C%E4%B8%80%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验一
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lab2/%E5%AE%9E%E9%AA%8C%E4%BA%8C%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验二
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../%E5%AE%9E%E9%AA%8C%E4%B8%89%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验三
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lab4/%E5%AE%9E%E9%AA%8C%E5%9B%9B%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验四
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lab5/%E5%AE%9E%E9%AA%8C%E4%BA%94%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验五
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lab6/%E5%AE%9E%E9%AA%8C%E5%85%AD%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验六
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lab7/%E5%AE%9E%E9%AA%8C%E4%B8%83%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验七
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lab8/%E5%AE%9E%E9%AA%8C%E5%85%AB%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验八
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lab9/%E5%AE%9E%E9%AA%8C%E4%B9%9D%E4%BB%8B%E7%BB%8D/" class="md-tabs__link">
+          
+  
+  
+  实验九
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../final/%E7%AD%94%E8%BE%A9%E7%9B%B8%E5%85%B3%E5%AE%89%E6%8E%92/" class="md-tabs__link">
+          
+  
+  
+  课程大作业
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="深度学习平台和应用（2025春）" class="md-nav__button md-logo" aria-label="深度学习平台和应用（2025春）" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    深度学习平台和应用（2025春）
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    主页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验一
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            实验一
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/%E5%AE%9E%E9%AA%8C%E4%B8%80%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.2 实验任务一：环境配置
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab1/%E5%AE%9E%E9%AA%8C%E4%B8%80%E4%BB%A3%E7%A0%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.3 实验任务二：PyTorch练习
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验二
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            实验二
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/%E5%AE%9E%E9%AA%8C%E4%BA%8C%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/MINIST%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.2 实验任务一：MINIST手写数字识别
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab2/%E6%AD%A3%E5%88%99%E5%8C%96%E5%92%8C%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E6%8E%A2%E7%B4%A2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.3 实验任务二：正则化和激活函数探索
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验三
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            实验三
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%AE%9E%E9%AA%8C%E4%B8%89%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    3.2 实验任务一：图像卷积
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.2 实验任务一：图像卷积
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      互相关运算
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      填充和步幅
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="填充和步幅">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      填充
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      步幅
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      多输入输出通道
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="多输入输出通道">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      多输入通道
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      多输出通道
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      汇聚层
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="汇聚层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      最大汇聚层和平均汇聚层
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      汇聚层填充与步幅
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      多个通道
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      练习 图像中目标的边缘检测
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CNN%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.3 实验任务二：CNN图像分类
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验四
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            实验四
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/%E5%AE%9E%E9%AA%8C%E5%9B%9B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/%E8%AF%8D%E5%B5%8C%E5%85%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.2 实验任务一：词嵌入
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab4/RNN%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.3 实验任务二：RNN文本生成
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验五
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            实验五
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab5/%E5%AE%9E%E9%AA%8C%E4%BA%94%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab5/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.2 实验任务一：Transformer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab5/%E9%A2%84%E8%AE%AD%E7%BB%83%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.3 实验任务二：预训练语言模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验六
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            实验六
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab6/%E5%AE%9E%E9%AA%8C%E5%85%AD%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab6/%E5%AE%9E%E9%AA%8C%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9A%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%EF%BC%88GAN%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.2 实验任务一：GAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab6/%E5%AE%9E%E9%AA%8C%E4%BB%BB%E5%8A%A1%E4%BA%8C%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%8D%B7%E7%A7%AF%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%EF%BC%88DCGAN%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.3 实验任务二：DCGAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab6/%E5%AE%9E%E9%AA%8C%E4%BB%BB%E5%8A%A1%E4%B8%89%EF%BC%9AWGAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.4 实验任务三：WGAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验七
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            实验七
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab7/%E5%AE%9E%E9%AA%8C%E4%B8%83%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab7/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E5%92%8C%E5%85%83%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.2 实验任务：迁移学习和元学习
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验八
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            实验八
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab8/%E5%AE%9E%E9%AA%8C%E5%85%AB%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab8/%E5%A4%9A%E6%A8%A1%E6%80%81%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8.2 实验任务：多模态情感分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    实验九
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            实验九
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab9/%E5%AE%9E%E9%AA%8C%E4%B9%9D%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9.1 实验说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    课程大作业
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            课程大作业
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/%E7%AD%94%E8%BE%A9%E7%9B%B8%E5%85%B3%E5%AE%89%E6%8E%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    答辩相关安排
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/%E8%AF%BE%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    可选的课程大作业
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/NJUProject_PEFT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    参数高效微调（PEFT）
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/NJU_DL2025_project_RL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于强化学习的小游戏实现
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/NJU_2025spring_ranking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于大语言模型的零样本文档排序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/NJUProject_MultimodalRumorDetection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多模态谣言检测
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/Generation_Length_Prediction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LLM输出长度预测
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/Caching-Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    KV cache缓存策略探索
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/Profiling-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    大模型训练性能Profiling和优化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/TRAINING_SWAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    大模型训练过程中的显存换出换入探索
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/NJUProject_MoE_Offloading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MoE Offloading：混合专家模型推理显存换入换出
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/NJUProject_Speculative_Decoding_Draft_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    投机解码的draft策略分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/NJU_steer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于引导的大语言模型幻觉缓解
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/NJUProject_toolagent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    智能工具调用代理系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/NJUProject_multiagent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    轻量级多Agent协作系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../final/projects/NJU_DL2025_project_diffusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于扩散模型的个性化图像生成
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      互相关运算
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      填充和步幅
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="填充和步幅">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      填充
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      步幅
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      多输入输出通道
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="多输入输出通道">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      多输入通道
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      多输出通道
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      汇聚层
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="汇聚层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      最大汇聚层和平均汇聚层
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      汇聚层填充与步幅
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      多个通道
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      练习 图像中目标的边缘检测
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">实验任务一： 图像卷积<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">互相关运算<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>如图中所示，考虑一个3x3矩阵作为输入张量，卷积核定义为一个2x2矩阵。</p>
+<p><img alt="示例图片" src="../pics/img.png" /></p>
+<p>在二维互相关运算中，卷积窗口从输入张量的左上角开始，从左到右、从上到下滑动。 
+当卷积窗口滑动到新一个位置时，包含在该窗口中的部分张量与卷积核张量进行按元素相乘，
+得到的张量再求和得到一个单一的标量值，由此我们得出了这一位置的输出张量值。 
+在如上例子中，输出张量的四个元素由二维互相关运算得到，这个输出高度为2、宽度为2</p>
+<p>具体计算过程如下所示</p>
+<p><img alt="示例图片" src="../pics/img_1.png" /></p>
+<p>注意，输出大小略小于输入大小。这是因为卷积核的宽度和高度大于1， 而卷积核只与图像中
+每个大小完全适合的位置进行互相关运算。给出如下计算公式计算输出矩阵的大小。</p>
+<p><img alt="示例图片" src="../pics/img_2.png" /></p>
+<p>在之前图中例子中，输入为3x3张量，卷积核为2x2张量，那么输出张量形状则为(3-2+1)x
+(3-2+1)</p>
+<p>接下来，我们在corr2d函数中实现如上过程，该函数接受输入张量X和卷积核张量K，
+并返回输出张量Y</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>import<span class="w"> </span>torch
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>from<span class="w"> </span>torch<span class="w"> </span>import<span class="w"> </span>nn
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>def<span class="w"> </span>corr2d<span class="o">(</span>X,<span class="w"> </span>K<span class="o">)</span>:<span class="w">  </span><span class="c1">#@save</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;计算二维互相关运算&quot;&quot;&quot;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span>h,<span class="w"> </span><span class="nv">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>K.shape
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nv">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.zeros<span class="o">((</span>X.shape<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>h<span class="w"> </span>+<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>X.shape<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>w<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">))</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>Y.shape<span class="o">[</span><span class="m">0</span><span class="o">])</span>:
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span>j<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>Y.shape<span class="o">[</span><span class="m">1</span><span class="o">])</span>:
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">            </span>Y<span class="o">[</span>i,<span class="w"> </span>j<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>X<span class="o">[</span>i:i<span class="w"> </span>+<span class="w"> </span>h,<span class="w"> </span>j:j<span class="w"> </span>+<span class="w"> </span>w<span class="o">]</span><span class="w"> </span>*<span class="w"> </span>K<span class="o">)</span>.sum<span class="o">()</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span>Y
+</span></code></pre></div>
+测试
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.tensor<span class="o">([[</span><span class="m">0</span>.0,<span class="w"> </span><span class="m">1</span>.0,<span class="w"> </span><span class="m">2</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">3</span>.0,<span class="w"> </span><span class="m">4</span>.0,<span class="w"> </span><span class="m">5</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">6</span>.0,<span class="w"> </span><span class="m">7</span>.0,<span class="w"> </span><span class="m">8</span>.0<span class="o">]])</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.tensor<span class="o">([[</span><span class="m">0</span>.0,<span class="w"> </span><span class="m">1</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">2</span>.0,<span class="w"> </span><span class="m">3</span>.0<span class="o">]])</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>corr2d<span class="o">(</span>X,<span class="w"> </span>K<span class="o">)</span>
+</span></code></pre></div>
+输出
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>tensor<span class="o">([[</span><span class="m">19</span>.,<span class="w"> </span><span class="m">25</span>.<span class="o">]</span>,
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">        </span><span class="o">[</span><span class="m">37</span>.,<span class="w"> </span><span class="m">43</span>.<span class="o">]])</span>
+</span></code></pre></div>
+卷积层对输入和卷积核权重进行互相关运算，并在添加标量偏置之后产生输出。 所以，
+卷积层中的两个被训练的参数是卷积核权重和标量偏置。 就像我们之前随机初始化全连接
+层一样，在训练基于卷积层的模型时，我们也随机初始化卷积核权重。</p>
+<p>基于上面定义的corr2d函数实现二维卷积层。在__init__构造函数中，将weight
+和bias声明为两个模型参数。前向传播函数调用corr2d函数并添加偏置。</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>class<span class="w"> </span>Conv2D<span class="o">(</span>nn.Module<span class="o">)</span>:
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>def<span class="w"> </span>__init__<span class="o">(</span>self,<span class="w"> </span>kernel_size<span class="o">)</span>:
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span>super<span class="o">()</span>.__init__<span class="o">()</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span>self.weight<span class="w"> </span><span class="o">=</span><span class="w"> </span>nn.Parameter<span class="o">(</span>torch.rand<span class="o">(</span>kernel_size<span class="o">))</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span>self.bias<span class="w"> </span><span class="o">=</span><span class="w"> </span>nn.Parameter<span class="o">(</span>torch.zeros<span class="o">(</span><span class="m">1</span><span class="o">))</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span>def<span class="w"> </span>forward<span class="o">(</span>self,<span class="w"> </span>x<span class="o">)</span>:
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span>corr2d<span class="o">(</span>x,<span class="w"> </span>self.weight<span class="o">)</span><span class="w"> </span>+<span class="w"> </span>self.bias
+</span></code></pre></div>
+<h2 id="_3">填充和步幅<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>本节我们将介绍填充（padding）和步幅（stride）。假设以下情景： 
+有时，在应用了连续的卷积之后，我们最终得到的输出远小于输入大小。
+这是由于卷积核的宽度和高度通常大于
+所导致的。比如，一个240x240 像素的图像，经过10层 5x5的卷积后，将减少到200x200
+像素。如此一来，原始图像的边界丢失了许多有用信息。
+而填充是解决此问题最有效的方法； 
+有时，我们可能希望大幅降低图像的宽度和高度。例如，
+如果我们发现原始的输入分辨率十分冗余。步幅则可以在这类情况下提供帮助。</p>
+<h3 id="_4">填充<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>如上所述，在应用多层卷积时，我们常常丢失边缘像素。 由于我们通常使用小卷积核，
+因此对于任何单个卷积，我们可能只会丢失几个像素。 但随着我们应用许多连续卷积层，
+累积丢失的像素数就多了。 解决这个问题的简单方法即为填充（padding）：
+在输入图像的边界填充元素（通常填充元素是 0）。 
+例如，在下图中，我们将3x3输入填充到5x5，那么它的输出就增加为4x4 。
+阴影部分是第一个输出元素以及用于输出计算的输入和核张量元素：0x0+0x1+0x2+0x3=0
+。</p>
+<p><img alt="示例图片" src="../pics/img_3.png" /></p>
+<p>假设我们原张量形状为nxn，卷积核为kxk，我们在原张量的基础上填充A行，在原张量基础上
+填充B列，那么在进行互相关运算后，得到的输出形状为(n+A-k+1)x(n+B-K+1),
+在图中的例子中，输出初始是3x3，我们在填充了两行（上下各一行）以及两列，那么新的张量
+为5x5， 通过运算后，得到形状为(5-2+1)x(5-2+1)</p>
+<p>在下面的例子中，我们创建一个高度和宽度为3的二维卷积层，并在所有侧边填充1个像素。
+给定高度和宽度为8的输入，则输出的高度和宽度也是8。
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>import<span class="w"> </span>torch
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>from<span class="w"> </span>torch<span class="w"> </span>import<span class="w"> </span>nn
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># 为了方便起见，我们定义了一个计算卷积层的函数。</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># 此函数初始化卷积层权重，并对输入和输出提高和缩减相应的维数</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>def<span class="w"> </span>comp_conv2d<span class="o">(</span>conv2d,<span class="w"> </span>X<span class="o">)</span>:
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="c1"># 这里的（1，1）表示批量大小和通道数都是1</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nv">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>X.reshape<span class="o">((</span><span class="m">1</span>,<span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span>+<span class="w"> </span>X.shape<span class="o">)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nv">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>conv2d<span class="o">(</span>X<span class="o">)</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="c1"># 省略前两个维度：批量大小和通道</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span>Y.reshape<span class="o">(</span>Y.shape<span class="o">[</span><span class="m">2</span>:<span class="o">])</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># 请注意，这里每边都填充了1行或1列，因此总共添加了2行或2列</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="nv">conv2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>nn.Conv2d<span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="nv">kernel_size</span><span class="o">=</span><span class="m">3</span>,<span class="w"> </span><span class="nv">padding</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="nv">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.rand<span class="o">(</span><span class="nv">size</span><span class="o">=(</span><span class="m">8</span>,<span class="w"> </span><span class="m">8</span><span class="o">))</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>comp_conv2d<span class="o">(</span>conv2d,<span class="w"> </span>X<span class="o">)</span>.shape
+</span></code></pre></div>
+输出是：
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>torch.Size<span class="o">([</span><span class="m">8</span>,<span class="w"> </span><span class="m">8</span><span class="o">])</span>
+</span></code></pre></div></p>
+<h3 id="_5">步幅<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>在计算互相关时，卷积窗口从输入张量的左上角开始，向下、向右滑动。 在前面的例子中
+，我们默认每次滑动一个元素。 但是，有时候为了高效计算或是缩减采样次数，
+卷积窗口可以跳过中间位置，每次滑动多个元素。</p>
+<p>我们将每次滑动元素的数量称为步幅（stride）。到目前为止，我们只使用过高度或
+宽度为1 的步幅，那么如何使用较大的步幅呢？ 下图是垂直步幅为3 ，水平步幅为2
+的二维互相关运算。 着色部分是输出元素以及用于输出计算的输入和内核张量元素：</p>
+<p><img alt="示例图片" src="../pics/img_4.png" /></p>
+<p>在这里给出输出形状的新计算公式：</p>
+<p><img alt="示例图片" src="../pics/img_5.png" /></p>
+<p>其中除法运算均向下取整。以图中举例，初始为3x3，填充2行2列，在水平方向步长为2
+，在竖直方向步长为3，那么有在水平方向有(3-2+2+2)/2=2(注意向下取整)，在竖直
+方向(3-2+2+3)/3=2,最后输出为2x2</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">conv2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>nn.Conv2d<span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="nv">kernel_size</span><span class="o">=</span><span class="m">3</span>,<span class="w"> </span><span class="nv">padding</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">stride</span><span class="o">=</span><span class="m">2</span><span class="o">)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>comp_conv2d<span class="o">(</span>conv2d,<span class="w"> </span>X<span class="o">)</span>.shape
+</span></code></pre></div>
+输出：
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>torch.Size<span class="o">([</span><span class="m">4</span>,<span class="w"> </span><span class="m">4</span><span class="o">])</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">conv2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>nn.Conv2d<span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="nv">kernel_size</span><span class="o">=(</span><span class="m">3</span>,<span class="w"> </span><span class="m">5</span><span class="o">)</span>,<span class="w"> </span><span class="nv">padding</span><span class="o">=(</span><span class="m">0</span>,<span class="w"> </span><span class="m">1</span><span class="o">)</span>,<span class="w"> </span><span class="nv">stride</span><span class="o">=(</span><span class="m">3</span>,<span class="w"> </span><span class="m">4</span><span class="o">))</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>comp_conv2d<span class="o">(</span>conv2d,<span class="w"> </span>X<span class="o">)</span>.shape
+</span></code></pre></div>
+输出：
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>torch.Size<span class="o">([</span><span class="m">2</span>,<span class="w"> </span><span class="m">2</span><span class="o">])</span>
+</span></code></pre></div></p>
+<h2 id="_6">多输入输出通道<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>彩色图像具有标准的RGB通道来代表红、绿和蓝。 但是到目前为止，我们仅展示了单个输入
+和单个输出通道的简化例子。 这使得我们可以将输入、卷积核和输出看作二维张量。</p>
+<p>当我们添加通道时，我们的输入和隐藏的表示都变成了三维张量。例如，每个RGB输入图像
+具有3 x h x w 的形状。我们将这个大小为3的轴称为通道（channel）维度。
+本节将更深入地研究具有多输入和多输出通道的卷积核。</p>
+<h3 id="_7">多输入通道<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>当输入包含多个通道时，需要构造一个与输入数据具有
+相同输入通道数的卷积核，以便与输入数据进行互相关运算。</p>
+<p><img alt="示例图片" src="../pics/img_6.png" /></p>
+<p>如图中所示，现在输入形状为2x3x3，即有两个通道，卷积核形状为2x2x2。
+图中加深部分计算过程为：(1x1+2x2+4x3+5x4)+(0x0+1x1+3x2+4x3)=56</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>import<span class="w"> </span>torch
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>from<span class="w"> </span>torch<span class="w"> </span>import<span class="w"> </span>nn
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>def<span class="w"> </span>corr2d<span class="o">(</span>X,<span class="w"> </span>K<span class="o">)</span>:<span class="w">  </span><span class="c1">#@save</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;计算二维互相关运算&quot;&quot;&quot;</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span>h,<span class="w"> </span><span class="nv">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>K.shape
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="nv">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.zeros<span class="o">((</span>X.shape<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>h<span class="w"> </span>+<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>X.shape<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>w<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">))</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>Y.shape<span class="o">[</span><span class="m">0</span><span class="o">])</span>:
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span>j<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>Y.shape<span class="o">[</span><span class="m">1</span><span class="o">])</span>:
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">            </span>Y<span class="o">[</span>i,<span class="w"> </span>j<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>X<span class="o">[</span>i:i<span class="w"> </span>+<span class="w"> </span>h,<span class="w"> </span>j:j<span class="w"> </span>+<span class="w"> </span>w<span class="o">]</span><span class="w"> </span>*<span class="w"> </span>K<span class="o">)</span>.sum<span class="o">()</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span>Y
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>import<span class="w"> </span>torch
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>def<span class="w"> </span>corr2d_multi_in<span class="o">(</span>X,<span class="w"> </span>K<span class="o">)</span>:
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">    </span><span class="c1"># 先遍历“X”和“K”的第0个维度（通道维度），再把它们加在一起</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span>sum<span class="o">(</span>corr2d<span class="o">(</span>x,<span class="w"> </span>k<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>x,<span class="w"> </span>k<span class="w"> </span><span class="k">in</span><span class="w"> </span>zip<span class="o">(</span>X,<span class="w"> </span>K<span class="o">))</span>
+</span></code></pre></div>
+构造与图中相同输入与卷积核
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.tensor<span class="o">([[[</span><span class="m">0</span>.0,<span class="w"> </span><span class="m">1</span>.0,<span class="w"> </span><span class="m">2</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">3</span>.0,<span class="w"> </span><span class="m">4</span>.0,<span class="w"> </span><span class="m">5</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">6</span>.0,<span class="w"> </span><span class="m">7</span>.0,<span class="w"> </span><span class="m">8</span>.0<span class="o">]]</span>,
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">               </span><span class="o">[[</span><span class="m">1</span>.0,<span class="w"> </span><span class="m">2</span>.0,<span class="w"> </span><span class="m">3</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">4</span>.0,<span class="w"> </span><span class="m">5</span>.0,<span class="w"> </span><span class="m">6</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">7</span>.0,<span class="w"> </span><span class="m">8</span>.0,<span class="w"> </span><span class="m">9</span>.0<span class="o">]]])</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nv">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.tensor<span class="o">([[[</span><span class="m">0</span>.0,<span class="w"> </span><span class="m">1</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">2</span>.0,<span class="w"> </span><span class="m">3</span>.0<span class="o">]]</span>,<span class="w"> </span><span class="o">[[</span><span class="m">1</span>.0,<span class="w"> </span><span class="m">2</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">3</span>.0,<span class="w"> </span><span class="m">4</span>.0<span class="o">]]])</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>corr2d_multi_in<span class="o">(</span>X,<span class="w"> </span>K<span class="o">)</span>
+</span></code></pre></div>
+输出：
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>tensor<span class="o">([[</span><span class="w"> </span><span class="m">56</span>.,<span class="w">  </span><span class="m">72</span>.<span class="o">]</span>,
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">        </span><span class="o">[</span><span class="m">104</span>.,<span class="w"> </span><span class="m">120</span>.<span class="o">]])</span>
+</span></code></pre></div></p>
+<h3 id="_8">多输出通道<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>到目前为止，不论有多少输入通道，我们还只有一个输出通道。在最流行的神经网络架构中
+，随着神经网络层数的加深， 我们常会增加输出通道的维数，
+通过减少空间分辨率以获得更大的通道深度。</p>
+<p><img alt="示例图片" src="../pics/img_7.png" /></p>
+<p>举例来说，如上图所示，输入形状为3x3x3，卷积核为3x1x1x2，
+卷积核第一个维度表示3个输入通道,(注意，在实际应用中各个维度代表的含义根据例子
+来决定)，
+最后一个维度表示2个输出通道，输出形状为2x3x3</p>
+<p>如下所示，我们实现一个计算多个通道的输出的互相关函数。
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>def<span class="w"> </span>corr2d_multi_in_out<span class="o">(</span>X,<span class="w"> </span>K<span class="o">)</span>:
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="c1"># 迭代“K”的第0个维度，每次都对输入“X”执行互相关运算。</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="c1"># 最后将所有结果都叠加在一起</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span>torch.stack<span class="o">([</span>corr2d_multi_in<span class="o">(</span>X,<span class="w"> </span>k<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>k<span class="w"> </span><span class="k">in</span><span class="w"> </span>K<span class="o">]</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nv">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.stack<span class="o">((</span>K,<span class="w"> </span>K<span class="w"> </span>+<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>K<span class="w"> </span>+<span class="w"> </span><span class="m">2</span><span class="o">)</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>K.shape<span class="w"> </span>
+</span></code></pre></div>
+结果如下，在这里我们的输出通道放在第0维：
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>torch.Size<span class="o">([</span><span class="m">3</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="m">2</span><span class="o">])</span>
+</span></code></pre></div></p>
+<p>下面，我们对输入张量X与卷积核张量K执行互相关运算。现在的输出包含3
+个通道，
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nv">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.tensor<span class="o">([[[</span><span class="m">0</span>.0,<span class="w"> </span><span class="m">1</span>.0,<span class="w"> </span><span class="m">2</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">3</span>.0,<span class="w"> </span><span class="m">4</span>.0,<span class="w"> </span><span class="m">5</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">6</span>.0,<span class="w"> </span><span class="m">7</span>.0,<span class="w"> </span><span class="m">8</span>.0<span class="o">]]</span>,
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">               </span><span class="o">[[</span><span class="m">1</span>.0,<span class="w"> </span><span class="m">2</span>.0,<span class="w"> </span><span class="m">3</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">4</span>.0,<span class="w"> </span><span class="m">5</span>.0,<span class="w"> </span><span class="m">6</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">7</span>.0,<span class="w"> </span><span class="m">8</span>.0,<span class="w"> </span><span class="m">9</span>.0<span class="o">]]])</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>corr2d_multi_in_out<span class="o">(</span>X,<span class="w"> </span>K<span class="o">)</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>tensor<span class="o">([[[</span><span class="w"> </span><span class="m">56</span>.,<span class="w">  </span><span class="m">72</span>.<span class="o">]</span>,
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">         </span><span class="o">[</span><span class="m">104</span>.,<span class="w"> </span><span class="m">120</span>.<span class="o">]]</span>,
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">        </span><span class="o">[[</span><span class="w"> </span><span class="m">76</span>.,<span class="w"> </span><span class="m">100</span>.<span class="o">]</span>,
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">         </span><span class="o">[</span><span class="m">148</span>.,<span class="w"> </span><span class="m">172</span>.<span class="o">]]</span>,
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">        </span><span class="o">[[</span><span class="w"> </span><span class="m">96</span>.,<span class="w"> </span><span class="m">128</span>.<span class="o">]</span>,
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">         </span><span class="o">[</span><span class="m">192</span>.,<span class="w"> </span><span class="m">224</span>.<span class="o">]]])</span>
+</span></code></pre></div></p>
+<h2 id="_9">汇聚层<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p>通常当我们处理图像时，我们希望逐渐降低隐藏表示的空间分辨率、聚集信息，
+这样随着我们在神经网络中层叠的上升，每个神经元对其敏感的感受野（输入）就越大。</p>
+<p>本节将介绍汇聚（pooling）层，它具有双重目的：
+降低卷积层对位置的敏感性，同时降低对空间降采样表示的敏感性。</p>
+<h3 id="_10">最大汇聚层和平均汇聚层<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>与卷积层类似，汇聚层运算符由一个固定形状的窗口组成，该窗口根据其步幅大小在输入的
+所有区域上滑动，为固定形状窗口（有时称为汇聚窗口）遍历的每个位置计算一个输出。 
+然而，不同于卷积层中的输入与卷积核之间的互相关计算，汇聚层不包含参数。
+相反，池运算是确定性的，我们通常计算汇聚窗口中所有元素的最大值或平均值。
+这些操作分别称为最大汇聚层（maximum pooling）和平均汇聚层（average pooling）。</p>
+<p>在这两种情况下，与互相关运算符一样，
+汇聚窗口从输入张量的左上角开始，从左往右、从上往下的在输入张量内滑动。
+在汇聚窗口到达的每个位置，它计算该窗口中输入子张量的最大值或平均值。
+计算最大值或平均值是取决于使用了最大汇聚层还是平均汇聚层。</p>
+<p><img alt="示例图片" src="../pics/img_8.png" /></p>
+<p>图中的输出张量的高度为2，宽度为2 。这四个元素为每个汇聚窗口中的最大值：</p>
+<p><img alt="示例图片" src="../pics/img_9.png" /></p>
+<p>在下面的代码中的pool2d函数，我们实现汇聚层的前向传播。
+然而，这里我们没有卷积核，输出为输入中每个区域的最大值或平均值。</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>import<span class="w"> </span>torch
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>from<span class="w"> </span>torch<span class="w"> </span>import<span class="w"> </span>nn
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>def<span class="w"> </span>pool2d<span class="o">(</span>X,<span class="w"> </span>pool_size,<span class="w"> </span><span class="nv">mode</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="o">)</span>:
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span>p_h,<span class="w"> </span><span class="nv">p_w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pool_size
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span><span class="nv">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.zeros<span class="o">((</span>X.shape<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>p_h<span class="w"> </span>+<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>X.shape<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>p_w<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">))</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>Y.shape<span class="o">[</span><span class="m">0</span><span class="o">])</span>:
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span>j<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>Y.shape<span class="o">[</span><span class="m">1</span><span class="o">])</span>:
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nv">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;max&#39;</span>:
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">                </span>Y<span class="o">[</span>i,<span class="w"> </span>j<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>X<span class="o">[</span>i:<span class="w"> </span>i<span class="w"> </span>+<span class="w"> </span>p_h,<span class="w"> </span>j:<span class="w"> </span>j<span class="w"> </span>+<span class="w"> </span>p_w<span class="o">]</span>.max<span class="o">()</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">            </span><span class="k">elif</span><span class="w"> </span><span class="nv">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;avg&#39;</span>:
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">                </span>Y<span class="o">[</span>i,<span class="w"> </span>j<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>X<span class="o">[</span>i:<span class="w"> </span>i<span class="w"> </span>+<span class="w"> </span>p_h,<span class="w"> </span>j:<span class="w"> </span>j<span class="w"> </span>+<span class="w"> </span>p_w<span class="o">]</span>.mean<span class="o">()</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span>Y
+</span></code></pre></div>
+构造输入：
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nv">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.tensor<span class="o">([[</span><span class="m">0</span>.0,<span class="w"> </span><span class="m">1</span>.0,<span class="w"> </span><span class="m">2</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">3</span>.0,<span class="w"> </span><span class="m">4</span>.0,<span class="w"> </span><span class="m">5</span>.0<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">6</span>.0,<span class="w"> </span><span class="m">7</span>.0,<span class="w"> </span><span class="m">8</span>.0<span class="o">]])</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>pool2d<span class="o">(</span>X,<span class="w"> </span><span class="o">(</span><span class="m">2</span>,<span class="w"> </span><span class="m">2</span><span class="o">))</span>
+</span></code></pre></div>
+输出为：
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>tensor<span class="o">([[</span><span class="m">4</span>.,<span class="w"> </span><span class="m">5</span>.<span class="o">]</span>,
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">        </span><span class="o">[</span><span class="m">7</span>.,<span class="w"> </span><span class="m">8</span>.<span class="o">]])</span>
+</span></code></pre></div>
+此外，我们还可以验证平均汇聚层。
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>pool2d<span class="o">(</span>X,<span class="w"> </span><span class="o">(</span><span class="m">2</span>,<span class="w"> </span><span class="m">2</span><span class="o">)</span>,<span class="w"> </span><span class="s1">&#39;avg&#39;</span><span class="o">)</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>tensor<span class="o">([[</span><span class="m">2</span>.,<span class="w"> </span><span class="m">3</span>.<span class="o">]</span>,
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">        </span><span class="o">[</span><span class="m">5</span>.,<span class="w"> </span><span class="m">6</span>.<span class="o">]])</span>
+</span></code></pre></div></p>
+<h3 id="_11">汇聚层填充与步幅<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>与卷积层一样，汇聚层也可以改变输出形状。和以前一样，
+我们可以通过填充和步幅以获得所需的输出形状。 
+下面，我们用深度学习框架中内置的二维最大汇聚层，
+来演示汇聚层中填充和步幅的使用。 
+我们首先构造了一个输入张量X，它有四个维度，其中样本数和通道数都是1。
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nv">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.arange<span class="o">(</span><span class="m">16</span>,<span class="w"> </span><span class="nv">dtype</span><span class="o">=</span>torch.float32<span class="o">)</span>.reshape<span class="o">((</span><span class="m">1</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="m">4</span>,<span class="w"> </span><span class="m">4</span><span class="o">))</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>X
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>tensor<span class="o">([[[[</span><span class="w"> </span><span class="m">0</span>.,<span class="w">  </span><span class="m">1</span>.,<span class="w">  </span><span class="m">2</span>.,<span class="w">  </span><span class="m">3</span>.<span class="o">]</span>,
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">          </span><span class="o">[</span><span class="w"> </span><span class="m">4</span>.,<span class="w">  </span><span class="m">5</span>.,<span class="w">  </span><span class="m">6</span>.,<span class="w">  </span><span class="m">7</span>.<span class="o">]</span>,
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">          </span><span class="o">[</span><span class="w"> </span><span class="m">8</span>.,<span class="w">  </span><span class="m">9</span>.,<span class="w"> </span><span class="m">10</span>.,<span class="w"> </span><span class="m">11</span>.<span class="o">]</span>,
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">          </span><span class="o">[</span><span class="m">12</span>.,<span class="w"> </span><span class="m">13</span>.,<span class="w"> </span><span class="m">14</span>.,<span class="w"> </span><span class="m">15</span>.<span class="o">]]]])</span>
+</span></code></pre></div>
+默认情况下，深度学习框架中的步幅与汇聚窗口的大小相同。 
+因此，如果我们使用形状为(3, 3)的汇聚窗口，
+那么默认情况下，我们得到的步幅形状为(3, 3)。
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nv">pool2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>nn.MaxPool2d<span class="o">(</span><span class="m">3</span><span class="o">)</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>pool2d<span class="o">(</span>X<span class="o">)</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>tensor<span class="o">([[[[</span><span class="m">10</span>.<span class="o">]]]])</span>
+</span></code></pre></div></p>
+<h3 id="_12">多个通道<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>在处理多通道输入数据时，汇聚层在每个输入通道上单独运算，
+而不是像卷积层一样在通道上对输入进行汇总。
+这意味着汇聚层的输出通道数与输入通道数相同。 
+下面，我们将在通道维度上连结张量X和X + 1，以构建具有2个通道的输入。</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nv">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.cat<span class="o">((</span>X,<span class="w"> </span>X<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">)</span>,<span class="w"> </span><span class="m">1</span><span class="o">)</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>X
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>tensor<span class="o">([[[[</span><span class="w"> </span><span class="m">0</span>.,<span class="w">  </span><span class="m">1</span>.,<span class="w">  </span><span class="m">2</span>.,<span class="w">  </span><span class="m">3</span>.<span class="o">]</span>,
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">          </span><span class="o">[</span><span class="w"> </span><span class="m">4</span>.,<span class="w">  </span><span class="m">5</span>.,<span class="w">  </span><span class="m">6</span>.,<span class="w">  </span><span class="m">7</span>.<span class="o">]</span>,
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">          </span><span class="o">[</span><span class="w"> </span><span class="m">8</span>.,<span class="w">  </span><span class="m">9</span>.,<span class="w"> </span><span class="m">10</span>.,<span class="w"> </span><span class="m">11</span>.<span class="o">]</span>,
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">          </span><span class="o">[</span><span class="m">12</span>.,<span class="w"> </span><span class="m">13</span>.,<span class="w"> </span><span class="m">14</span>.,<span class="w"> </span><span class="m">15</span>.<span class="o">]]</span>,
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w">         </span><span class="o">[[</span><span class="w"> </span><span class="m">1</span>.,<span class="w">  </span><span class="m">2</span>.,<span class="w">  </span><span class="m">3</span>.,<span class="w">  </span><span class="m">4</span>.<span class="o">]</span>,
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="w">          </span><span class="o">[</span><span class="w"> </span><span class="m">5</span>.,<span class="w">  </span><span class="m">6</span>.,<span class="w">  </span><span class="m">7</span>.,<span class="w">  </span><span class="m">8</span>.<span class="o">]</span>,
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="w">          </span><span class="o">[</span><span class="w"> </span><span class="m">9</span>.,<span class="w"> </span><span class="m">10</span>.,<span class="w"> </span><span class="m">11</span>.,<span class="w"> </span><span class="m">12</span>.<span class="o">]</span>,
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="w">          </span><span class="o">[</span><span class="m">13</span>.,<span class="w"> </span><span class="m">14</span>.,<span class="w"> </span><span class="m">15</span>.,<span class="w"> </span><span class="m">16</span>.<span class="o">]]]])</span>
+</span></code></pre></div>
+如下所示，汇聚后输出通道的数量仍然是2。
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nv">pool2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>nn.MaxPool2d<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="nv">padding</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">stride</span><span class="o">=</span><span class="m">2</span><span class="o">)</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>pool2d<span class="o">(</span>X<span class="o">)</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>tensor<span class="o">([[[[</span><span class="w"> </span><span class="m">5</span>.,<span class="w">  </span><span class="m">7</span>.<span class="o">]</span>,
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">          </span><span class="o">[</span><span class="m">13</span>.,<span class="w"> </span><span class="m">15</span>.<span class="o">]]</span>,
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">         </span><span class="o">[[</span><span class="w"> </span><span class="m">6</span>.,<span class="w">  </span><span class="m">8</span>.<span class="o">]</span>,
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">          </span><span class="o">[</span><span class="m">14</span>.,<span class="w"> </span><span class="m">16</span>.<span class="o">]]]])</span>
+</span></code></pre></div></p>
+<h2 id="_13">练习  图像中目标的边缘检测<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p>如下是卷积层的一个简单应用：通过找到像素变化的位置，来检测图像中不同颜色的边缘。 首先，我们构造一个
+6x8像素的黑白图像。中间四列为黑色（0），其余像素为白色（1）。</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>import<span class="w"> </span>torch
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>from<span class="w"> </span>torch<span class="w"> </span>import<span class="w"> </span>nn
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="nv">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.ones<span class="o">((</span><span class="m">6</span>,<span class="w"> </span><span class="m">8</span><span class="o">))</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>X<span class="o">[</span>:,<span class="w"> </span><span class="m">2</span>:6<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>X
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>tensor<span class="o">([[</span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.<span class="o">]</span>,
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">        </span><span class="o">[</span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.<span class="o">]</span>,
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">        </span><span class="o">[</span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.<span class="o">]</span>,
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">        </span><span class="o">[</span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.<span class="o">]</span>,
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">        </span><span class="o">[</span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.<span class="o">]</span>,
+</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="w">        </span><span class="o">[</span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">1</span>.,<span class="w"> </span><span class="m">1</span>.<span class="o">]])</span>
+</span></code></pre></div>
+接下来，我们构造一个高度为1、宽度为2的卷积核K。当进行互相关运算时，
+如果水平相邻的两元素相同，则输出为零，否则输出为非零。
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nv">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.tensor<span class="o">([[</span><span class="m">1</span>.0,<span class="w"> </span>-1.0<span class="o">]])</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>def<span class="w"> </span>corr2d<span class="o">(</span>X,<span class="w"> </span>K<span class="o">)</span>:<span class="w">  </span><span class="c1">#@save</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;计算二维互相关运算&quot;&quot;&quot;</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span>h,<span class="w"> </span><span class="nv">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>K.shape
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="w">    </span><span class="nv">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>torch.zeros<span class="o">((</span>X.shape<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>h<span class="w"> </span>+<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>X.shape<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>w<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">))</span>
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>Y.shape<span class="o">[</span><span class="m">0</span><span class="o">])</span>:
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span>j<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>Y.shape<span class="o">[</span><span class="m">1</span><span class="o">])</span>:
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="w">            </span>Y<span class="o">[</span>i,<span class="w"> </span>j<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>X<span class="o">[</span>i:i<span class="w"> </span>+<span class="w"> </span>h,<span class="w"> </span>j:j<span class="w"> </span>+<span class="w"> </span>w<span class="o">]</span><span class="w"> </span>*<span class="w"> </span>K<span class="o">)</span>.sum<span class="o">()</span>
+</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span>Y
+</span><span id="__span-33-9"><a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="nv">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>corr2d<span class="o">(</span>X,<span class="w"> </span>K<span class="o">)</span>
+</span><span id="__span-33-10"><a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a>Y
+</span></code></pre></div>
+输出为：
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>tensor<span class="o">([[</span><span class="w"> </span><span class="m">0</span>.,<span class="w">  </span><span class="m">1</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w"> </span>-1.,<span class="w">  </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="m">0</span>.,<span class="w">  </span><span class="m">1</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w"> </span>-1.,<span class="w">  </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="m">0</span>.,<span class="w">  </span><span class="m">1</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w"> </span>-1.,<span class="w">  </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="m">0</span>.,<span class="w">  </span><span class="m">1</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w"> </span>-1.,<span class="w">  </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="m">0</span>.,<span class="w">  </span><span class="m">1</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w"> </span>-1.,<span class="w">  </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="m">0</span>.,<span class="w">  </span><span class="m">1</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w">  </span><span class="m">0</span>.,<span class="w"> </span>-1.,<span class="w">  </span><span class="m">0</span>.<span class="o">]])</span>
+</span></code></pre></div>
+现在我们将输入的二维图像转置，再进行如上的互相关运算。 其输出如下，之前检测到的垂直边缘消失了。
+不出所料，这个卷积核K只可以检测垂直边缘，无法检测水平边缘。
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>corr2d<span class="o">(</span>X.t<span class="o">()</span>,<span class="w"> </span>K<span class="o">)</span>
+</span></code></pre></div>
+输出：
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>tensor<span class="o">([[</span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">        </span><span class="o">[</span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">        </span><span class="o">[</span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">        </span><span class="o">[</span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="w">        </span><span class="o">[</span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-36-6"><a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="w">        </span><span class="o">[</span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-36-7"><a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="w">        </span><span class="o">[</span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.<span class="o">]</span>,
+</span><span id="__span-36-8"><a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a><span class="w">        </span><span class="o">[</span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.,<span class="w"> </span><span class="m">0</span>.<span class="o">]])</span>
+</span><span id="__span-36-9"><a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="sb">````</span>
+</span><span id="__span-36-10"><a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a><span class="m">1</span>.请使用Conv2D类,补全训练部分代码，
+</span><span id="__span-36-11"><a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>使得训练得到的卷积核参数接近torch.tensor<span class="o">([[</span><span class="m">1</span>.0,<span class="w"> </span>-1.0<span class="o">]])</span>
+</span><span id="__span-36-12"><a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a><span class="sb">```</span>bash
+</span><span id="__span-36-13"><a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a>class<span class="w"> </span>Conv2D<span class="o">(</span>nn.Module<span class="o">)</span>:
+</span><span id="__span-36-14"><a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a><span class="w">    </span>def<span class="w"> </span>__init__<span class="o">(</span>self,<span class="w"> </span>kernel_size<span class="o">)</span>:
+</span><span id="__span-36-15"><a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a><span class="w">        </span>super<span class="o">()</span>.__init__<span class="o">()</span>
+</span><span id="__span-36-16"><a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a><span class="w">        </span>self.weight<span class="w"> </span><span class="o">=</span><span class="w"> </span>nn.Parameter<span class="o">(</span>torch.rand<span class="o">(</span>kernel_size<span class="o">))</span>
+</span><span id="__span-36-17"><a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a><span class="w">        </span>self.bias<span class="w"> </span><span class="o">=</span><span class="w"> </span>nn.Parameter<span class="o">(</span>torch.zeros<span class="o">(</span><span class="m">1</span><span class="o">))</span>
+</span><span id="__span-36-18"><a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a>
+</span><span id="__span-36-19"><a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a><span class="w">    </span>def<span class="w"> </span>forward<span class="o">(</span>self,<span class="w"> </span>x<span class="o">)</span>:
+</span><span id="__span-36-20"><a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span>corr2d<span class="o">(</span>x,<span class="w"> </span>self.weight<span class="o">)</span><span class="w"> </span>+<span class="w"> </span>self.bias
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="c1"># 构造一个二维卷积层，它具有1个输出通道和形状为（1，2）的卷积核</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="nv">conv2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>nn.Conv2d<span class="o">(</span><span class="m">1</span>,1,<span class="w"> </span><span class="nv">kernel_size</span><span class="o">=(</span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span><span class="o">)</span>,<span class="w"> </span><span class="nv">bias</span><span class="o">=</span>False<span class="o">)</span>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="c1"># 这个二维卷积层使用四维输入和输出格式（批量大小、通道、高度、宽度），</span>
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="c1"># 其中批量大小和通道数都为1</span>
+</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="nv">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>X.reshape<span class="o">((</span><span class="m">1</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="m">6</span>,<span class="w"> </span><span class="m">8</span><span class="o">))</span><span class="c1">#</span>
+</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="nv">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Y.reshape<span class="o">((</span><span class="m">1</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="m">6</span>,<span class="w"> </span><span class="m">7</span><span class="o">))</span><span class="c1">#标签</span>
+</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a>
+</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="c1">#训练补全部分(自定义损失函数，训练epoch，学习率等)</span>
+</span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="c1">#TODO：for循环epoch次</span>
+</span><span id="__span-37-11"><a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="c1">#TODO：前向传播</span>
+</span><span id="__span-37-12"><a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a><span class="c1">#TODO：计算损失</span>
+</span><span id="__span-37-13"><a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a><span class="c1">#TODO: 清除梯度</span>
+</span><span id="__span-37-14"><a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a><span class="c1">#TODO: 反向传播</span>
+</span><span id="__span-37-15"><a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a><span class="c1">#TODO: 更新参数</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>conv2d.weight.data.reshape<span class="o">((</span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span><span class="o">))</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="c1">#要求此输出接近torch.tensor([[1.0, -1.0]])，</span>
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="c1"># 如tensor([[ 0.9997, -0.9810]])</span>
+</span></code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "toc.follow", "content.code.copy", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
